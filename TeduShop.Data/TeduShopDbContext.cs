@@ -9,6 +9,7 @@ using TeduShop.Model.Models;
 
 namespace TeduShop.Data
 {
+    //hihihaha
     public class TeduShopDbContext : IdentityDbContext<ApplicationUser>
     {
         public TeduShopDbContext() : base("TeduShopConnection")
