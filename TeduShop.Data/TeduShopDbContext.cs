@@ -9,7 +9,7 @@ using TeduShop.Model.Models;
 
 namespace TeduShop.Data
 {
-    //hihihaha
+    //dell dell
     public class TeduShopDbContext : IdentityDbContext<ApplicationUser>
     {
         public TeduShopDbContext() : base("TeduShopConnection")
