@@ -15,6 +15,10 @@
             getProductCategories();
         }
 
+        $scope.AddProductCategory = function () {
+
+        }
+
         function getProductCategories(page) {
             page = page || 0;
             var config = {
