@@ -13,13 +13,13 @@ namespace TeduShop.Web.Models
             get;
             set;
         }
-        [Required]
+        [Required(ErrorMessage = "Yeu cau nhap ten danh muc")]
         public string Name
         {
             get;
             set;
         }
-        [Required]
+        [Required(ErrorMessage = "Yeu cau nhap alias")]
         public string Alias
         {
             get;
@@ -89,7 +89,7 @@ namespace TeduShop.Web.Models
             set;
         }
 
-        [Required]
+        [Required(ErrorMessage = "Yeu cau nhap status")]
         public bool Status
         {
             get;

@@ -7,7 +7,6 @@
         $scope.productCategory = {
             CreatedDate: new Date(),
             Status: true,
-            Name:'Danh muc 1',
         }
 
         $scope.parentCategories = [];

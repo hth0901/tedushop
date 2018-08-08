@@ -22,21 +22,26 @@
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">Tên danh mục</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" ng-change="GetSeoTitle()" name="name" ng-model="productCategory.Name" placeholder="Name">
+                        <input type="text" class="form-control" required ng-maxlength="256" ng-change="GetSeoTitle()" name="name" ng-model="productCategory.Name" placeholder="Name">
+                        <span ng-show="frmUpdateProductCategory.name.$error.required" class="has-error">Phải nhập tên danh mục</span>
+                        <span ng-show="frmUpdateProductCategory.name.$error.maxlength" class="has-error">Ten chi dc 5 ky tu</span>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="inputPassword3" class="col-sm-2 control-label">Tiêu đề SEO</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="alias" ng-model="productCategory.Alias" placeholder="Alias">
+                        <input type="text" class="form-control" required ng-maxlength="256" name="alias" ng-model="productCategory.Alias" placeholder="Alias">
+                        <span ng-show="frmUpdateProductCategory.alias.$error.required" class="has-error">Phải nhập alias</span>
+                        <span ng-show="frmUpdateProductCategory.alias.$error.maxlength" class="has-error">Alias chi dc 256 ky tu</span>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="inputPassword3" class="col-sm-2 control-label">Mô tả ngắn</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="description" placeholder="Description" ng-model="productCategory.Description">
+                        <input type="text" class="form-control" ng-maxlength="500" name="description" placeholder="Description" ng-model="productCategory.Description">
+                        <span ng-show="frmUpdateProductCategory.description.$error.maxlength" class="has-error">Description chỉ dc tối đa 500 kí tự</span>
                     </div>
                 </div>
 
@@ -53,14 +58,16 @@
                 <div class="form-group">
                     <label for="inputPassword3" class="col-sm-2 control-label">Thứ tự</label>
                     <div class="col-sm-10">
-                        <input type="number" class="form-control" name="displayOrder" placeholder="Order" ng-model="productCategory.DisplayOrder">
+                        <input type="number" class="form-control" required name="displayOrder" placeholder="Order" ng-model="productCategory.DisplayOrder">
+                        <span ng-show="frmUpdateProductCategory.displayOrder.$invalid" class="has-error">Phải nhập order</span>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="inputPassword3" class="col-sm-2 control-label">Hình ảnh</label>
                     <div class="col-sm-10">
-                        <input type="text" name="image" class="form-control" ng-model="productCategory.Image">
+                        <input type="text" name="image" ng-maxlength="256" class="form-control" ng-model="productCategory.Image">
+                        <span ng-show="frmUpdateProductCategory.image.$error.maxlength" class="has-error">Image chỉ dc tối đa 256 kí tự</span>
                     </div>
                 </div>
 
@@ -95,7 +102,7 @@
             </div><!-- /.box-body -->
             <div class="box-footer">
                 <button ui-sref="product_categories" class="btn btn-default">Cancel</button>
-                <button type="submit" class="btn btn-success pull-right">Sign in</button>
+                <button type="submit" ng-disabled="frmUpdateProductCategory.$invalid" class="btn btn-success pull-right">Sign in</button>
             </div><!-- /.box-footer -->
         </form>
     </div>
