@@ -2,14 +2,15 @@
 (function (app) {
     app.controller('productCategoryListController', productCategoryListController);
 
-    productCategoryListController.$inject = ['$scope', 'apiService', 'notificationService', '$ngBootbox'];
+    productCategoryListController.$inject = ['$scope', 'apiService', 'notificationService', '$ngBootbox', '$filter'];
 
-    function productCategoryListController($scope, apiService, notificationService, $ngBootbox) {
+    function productCategoryListController($scope, apiService, notificationService, $ngBootbox, $filter) {
         $scope.productCategories = [];
         $scope.page = 0;
         $scope.pageCount = 0;
         $scope.getProductCategories = getProductCategories;
         $scope.keyword = '';
+        $scope.isAll = false;
 
         $scope.search = function () {
             getProductCategories();
@@ -18,6 +19,50 @@
         $scope.AddProductCategory = function () {
 
         }
+
+        $scope.selectAll = function () {
+            if ($scope.isAll === false) {
+                angular.forEach($scope.productCategories, function (item) {
+                    item.checked = true;
+                });
+                $scope.isAll = true;
+            }
+            else {
+                angular.forEach($scope.productCategories, function (item) {
+                    item.checked = false;
+                });
+                $scope.isAll = false;
+            }
+        }
+
+        $scope.deleteMultiple = function () {
+            var listId = [];
+            $.each($scope.selected, function (i, item) {
+                listId.push(item.ID);
+            })
+            var config = {
+                params: {
+                    checkedItems: JSON.stringify(listId)
+                }
+            }
+            apiService.del('/api/productcategory/deletemulti', config, function (result) {
+                notificationService.displaySuccess('Xoa thanh cong' + result.data + ' records');
+                getProductCategories();
+            }, function () {
+                notificationService.displayError('Xoa khong thanh cong!!');
+            })
+        }
+
+        $scope.$watch("productCategories", function (n, o) {
+            var checkeds = $filter("filter")(n, { checked: true });
+            if (checkeds.length) {
+                $scope.selected = checkeds;
+                $('#btnDelete').removeAttr('disabled');
+            }
+            else {
+                $('#btnDelete').attr('disabled', 'disabled');
+            }
+        }, true);
 
         $scope.deleteProductCategory = function (id) {
             $ngBootbox.confirm('Are you sure to delete??').then(function () {

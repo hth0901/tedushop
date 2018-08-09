@@ -10,6 +10,8 @@ using TeduShop.Web.Infrastructure.Core;
 using AutoMapper;
 using TeduShop.Web.Models;
 using TeduShop.Web.Infrastructure.Extensions;
+using System.Web.Script.Serialization;
+using Newtonsoft.Json.Linq;
 
 namespace TeduShop.Web.Api
 {
@@ -171,6 +173,36 @@ namespace TeduShop.Web.Api
                     _productCategoryService.Save();
                     var responseData = Mapper.Map<ProductCategory, ProductCategoryViewModel>(oldProductCategory);
                     response = request.CreateResponse(HttpStatusCode.OK, responseData);
+                }
+
+                return response;
+            });
+        }
+        #endregion
+
+        #region delete multi records
+        [Route("deletemulti")]
+        [HttpDelete]
+        [AllowAnonymous]
+        public HttpResponseMessage DeleteMulti(HttpRequestMessage request, string checkedItems)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+
+                if (!ModelState.IsValid)
+                {
+                    response = request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
+                }
+                else
+                {
+                    var items = new JavaScriptSerializer().Deserialize<List<int>>(checkedItems);
+                    foreach (var item in items)
+                    {
+                        _productCategoryService.Delete(item);
+                    }
+                    _productCategoryService.Save();
+                    response = request.CreateResponse(HttpStatusCode.OK, items.Count);
                 }
 
                 return response;
