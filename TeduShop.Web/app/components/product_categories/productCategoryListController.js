@@ -2,9 +2,9 @@
 (function (app) {
     app.controller('productCategoryListController', productCategoryListController);
 
-    productCategoryListController.$inject = ['$scope', 'apiService', 'notificationService'];
+    productCategoryListController.$inject = ['$scope', 'apiService', 'notificationService', '$ngBootbox'];
 
-    function productCategoryListController($scope, apiService, notificationService) {
+    function productCategoryListController($scope, apiService, notificationService, $ngBootbox) {
         $scope.productCategories = [];
         $scope.page = 0;
         $scope.pageCount = 0;
@@ -17,6 +17,22 @@
 
         $scope.AddProductCategory = function () {
 
+        }
+
+        $scope.deleteProductCategory = function (id) {
+            $ngBootbox.confirm('Are you sure to delete??').then(function () {
+                var config = {
+                    params: {
+                        id: id,
+                    }
+                }
+                apiService.del('/api/productcategory/delete', config, function () {
+                    notificationService.displaySuccess('Xoa thanh cong!!');
+                    getProductCategories();
+                }, function () {
+                    notificationService.displayError('Xoa khong thanh cong!!');
+                })
+            });
         }
 
         function getProductCategories(page) {

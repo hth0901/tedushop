@@ -8,11 +8,25 @@
         return {
             get: get,
             post: post,
-            update: update
+            update: update,
+            del: deleteRecord,
         }
 
         function post(url, data, success, failure) {
             $http.post(url, data).then(function (result) {
+                success(result);
+            }, function (error) {
+                if (error.status === 401) {
+                    notificationService.displayError('Authenticate is required!!');
+                }
+                else if (failure != null) {
+                    failure(error);
+                }
+            });
+        }
+
+        function deleteRecord(url, data, success, failure) {
+            $http.delete(url, data).then(function (result) {
                 success(result);
             }, function (error) {
                 if (error.status === 401) {
