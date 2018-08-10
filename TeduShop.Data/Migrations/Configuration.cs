@@ -44,7 +44,8 @@ namespace TeduShop.Data.Migrations
             //var adminUser = manager.FindByEmail("kdc@gmail.com");
 
             //manager.AddToRoles(adminUser.Id, new string[] { "Admin", "User" });
-            CreateProductCategorySample(context);
+            //CreateProductCategorySample(context);
+            CreateProductSample(context);
         }
 
         private void CreateProductCategorySample(TeduShop.Data.TeduShopDbContext context)
@@ -82,6 +83,43 @@ namespace TeduShop.Data.Migrations
                 context.SaveChanges();
             }
             
+        }
+
+        private void CreateProductSample(TeduShop.Data.TeduShopDbContext context)
+        {
+            if (context.Products.Count() == 0)
+            {
+                List<Product> lstProduct = new List<Product>()
+                {
+                    new Product()
+                    {
+                        Name="san pham 1",
+                        Alias="san-pham-1",
+                        Status=true
+                    },
+                    new Product()
+                    {
+                        Name="san pham 2",
+                        Alias="san-pham-2",
+                        Status=false
+                    },
+                    new Product()
+                    {
+                        Name="san pham 3",
+                        Alias="san-pham-3",
+                        Status=true
+                    },
+                    new Product()
+                    {
+                        Name="san pham 4",
+                        Alias="san-pham-4",
+                        Status=true
+                    }
+                };
+                context.Products.AddRange(lstProduct);
+                context.SaveChanges();
+            }
+
         }
     }
 }

@@ -8,27 +8,23 @@
         $scope.products = [];
         $scope.page = 0;
         $scope.pageCount = 0;
-        $scope.getProductCategories = getProductCategories;
+        $scope.getProducts = getProducts;
         $scope.keyword = '';
         $scope.isAll = false;
 
         $scope.search = function () {
-            getProductCategories();
-        }
-
-        $scope.AddProductCategory = function () {
-
+            getProducts();
         }
 
         $scope.selectAll = function () {
             if ($scope.isAll === false) {
-                angular.forEach($scope.productCategories, function (item) {
+                angular.forEach($scope.products, function (item) {
                     item.checked = true;
                 });
                 $scope.isAll = true;
             }
             else {
-                angular.forEach($scope.productCategories, function (item) {
+                angular.forEach($scope.products, function (item) {
                     item.checked = false;
                 });
                 $scope.isAll = false;
@@ -45,15 +41,15 @@
                     checkedItems: JSON.stringify(listId)
                 }
             }
-            apiService.del('/api/productcategory/deletemulti', config, function (result) {
+            apiService.del('/api/product/deletemulti', config, function (result) {
                 notificationService.displaySuccess('Xoa thanh cong' + result.data + ' records');
-                getProductCategories();
+                getProducts();
             }, function () {
                 notificationService.displayError('Xoa khong thanh cong!!');
             })
         }
 
-        $scope.$watch("productCategories", function (n, o) {
+        $scope.$watch("products", function (n, o) {
             var checkeds = $filter("filter")(n, { checked: true });
             if (checkeds.length) {
                 $scope.selected = checkeds;
@@ -64,23 +60,23 @@
             }
         }, true);
 
-        $scope.deleteProductCategory = function (id) {
+        $scope.deleteProduct = function (id) {
             $ngBootbox.confirm('Are you sure to delete??').then(function () {
                 var config = {
                     params: {
                         id: id,
                     }
                 }
-                apiService.del('/api/productcategory/delete', config, function () {
+                apiService.del('/api/product/delete', config, function () {
                     notificationService.displaySuccess('Xoa thanh cong!!');
-                    getProductCategories();
+                    getProducts();
                 }, function () {
                     notificationService.displayError('Xoa khong thanh cong!!');
                 })
             });
         }
 
-        function getProductCategories(page) {
+        function getProducts(page) {
             page = page || 0;
             var config = {
                 params: {
@@ -90,21 +86,21 @@
                 }
             }
 
-            apiService.get('/api/productcategory/getall', config, function (result) {
+            apiService.get('/api/product/getall', config, function (result) {
                 if (result.data.TotalCount == 0) {
                     notificationService.displayWarning('Khong co ban ghi nao dc tim thay');
                 }
                 else
                     notificationService.displaySuccess("Da tim thay " + result.data.TotalCount + " ban ghi.");
-                $scope.productCategories = result.data.Items;
+                $scope.getProducts = result.data.Items;
                 $scope.page = result.data.Page;
                 $scope.pagesCount = result.data.TotalPages;
                 $scope.totalCount = result.data.TotalCount;
             }, function () {
-                console.log('Load productcategory failed!!!');
+                console.log('Load product failed!!!');
             });
         };
 
-        $scope.getProductCategories();
+        $scope.getProducts();
     };
 })(angular.module('tedushop.products'));
