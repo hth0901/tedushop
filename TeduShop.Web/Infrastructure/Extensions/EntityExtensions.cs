@@ -70,5 +70,31 @@ namespace TeduShop.Web.Infrastructure.Extensions
             des.MetaDescription = res.MetaDescription;
             des.Status = res.Status;
         }
+
+        public static void UpdateProduct(this Product des, ProductViewModel res)
+        {
+            des.ID = res.ID;
+            des.Name = res.Name;
+            des.Alias = res.Alias;
+            des.CategoryID = res.CategoryID;
+            des.Image = res.Image;
+            des.MoreImages = res.MoreImages;
+            des.Price = res.Price;
+            des.PromotionPrice = res.PromotionPrice;
+            des.Warranty = res.Warranty;
+            des.Description = res.Description;
+            des.Content = res.Content;
+            des.HomeFlag = res.HomeFlag;
+            des.HotFlag = res.HotFlag;
+            des.ViewCount = res.ViewCount;
+
+            des.CreatedDate = res.CreatedDate;
+            des.CreatedBy = res.CreatedBy;
+            des.UpdatedDate = res.UpdatedDate;
+            des.UpdatedBy = res.UpdatedBy;
+            des.MetaKeyword = res.MetaKeyword;
+            des.MetaDescription = res.MetaDescription;
+            des.Status = res.Status;
+        }
     }
 }
