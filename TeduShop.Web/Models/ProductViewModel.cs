@@ -78,6 +78,12 @@ namespace TeduShop.Web.Models
             get;
             set;
         }
+
+        public string Tags
+        {
+            get;
+            set;
+        }
         public virtual ProductCategoryViewModel ProductCategory
         {
             get;

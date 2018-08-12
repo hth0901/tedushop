@@ -87,6 +87,7 @@ namespace TeduShop.Web.Infrastructure.Extensions
             des.HomeFlag = res.HomeFlag;
             des.HotFlag = res.HotFlag;
             des.ViewCount = res.ViewCount;
+            des.Tags = res.Tags;
 
             des.CreatedDate = res.CreatedDate;
             des.CreatedBy = res.CreatedBy;

@@ -94,6 +94,12 @@ namespace TeduShop.Model.Models
             get;
             set;
         }
+
+        public string Tags
+        {
+            get;
+            set;
+        }
         [ForeignKey("CategoryID")]
         public virtual ProductCategory ProductCategory
         {

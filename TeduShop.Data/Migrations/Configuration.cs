@@ -45,7 +45,7 @@ namespace TeduShop.Data.Migrations
 
             //manager.AddToRoles(adminUser.Id, new string[] { "Admin", "User" });
             //CreateProductCategorySample(context);
-            CreateProductSample(context);
+            //CreateProductSample(context);
         }
 
         private void CreateProductCategorySample(TeduShop.Data.TeduShopDbContext context)
