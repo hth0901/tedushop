@@ -82,7 +82,7 @@
                 params: {
                     keyword: $scope.keyword,
                     page: page,
-                    pageSize: 4,
+                    pageSize: 5,
                 }
             }
 
@@ -92,7 +92,7 @@
                 }
                 else
                     notificationService.displaySuccess("Da tim thay " + result.data.TotalCount + " ban ghi.");
-                $scope.getProducts = result.data.Items;
+                $scope.products = result.data.Items;
                 $scope.page = result.data.Page;
                 $scope.pagesCount = result.data.TotalPages;
                 $scope.totalCount = result.data.TotalCount;
