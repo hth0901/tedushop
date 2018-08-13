@@ -9,12 +9,14 @@
             Status: true,
             Name: 'Danh muc 1',
         }
+        $scope.moreImages = [];
 
         $scope.productCategories = [];
 
         function loadProductDetail() {
             apiService.get('/api/product/getbyid/' + $stateParams.id, null, function (result) {
                 $scope.productInfo = result.data;
+                $scope.moreImages = JSON.parse($scope.productInfo.MoreImages) || [];
             }, function (error) {
                 notificationService.displayError(error.data);
             });
@@ -25,6 +27,7 @@
         }
 
         $scope.updateProduct = function () {
+            $scope.productInfo.MoreImages = JSON.stringify($scope.moreImages);
             apiService.update('/api/product/update', $scope.productInfo, function (result) {
                 notificationService.displaySuccess(result.data.Name + ' da dc cap nhat.');
                 $state.go('products');
@@ -39,6 +42,16 @@
             }, function (error) {
                 console.log('get product category failed');
             });
+        }
+
+        $scope.ChooseMoreImage = function () {
+            var finder = new CKFinder();
+            finder.selectActionFunction = function (fileUrl) {
+                $scope.$apply(function () {
+                    $scope.moreImages.push(fileUrl);
+                })
+            };
+            finder.popup();
         }
 
         getListProductCategories();
