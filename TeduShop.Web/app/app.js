@@ -5,8 +5,20 @@
     config.$inject = ['$stateProvider', '$urlRouterProvider'];
 
     function config($stateProvider, $urlRouterProvider) {
-        $stateProvider.state('home', {          //'home' la` ten cua state
+        $stateProvider
+        .state('base', {
+            url: '',
+            templateUrl: '/app/shared/views/baseView.html',
+            abstract: true,
+        })
+        .state('login', {          //'home' la` ten cua state
+            url: "/login",
+            templateUrl: "/app/components/login/loginView.html",
+            controller: "loginController",
+        })
+        .state('home', {          //'home' la` ten cua state
             url: "/admin",
+            parent:'base',
             templateUrl: "/app/components/home/homeView.html",
             controller: "homeController",
         });
