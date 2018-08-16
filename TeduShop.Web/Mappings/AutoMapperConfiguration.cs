@@ -17,6 +17,7 @@ namespace TeduShop.Web.Mappings
             Mapper.CreateMap<Tag, TagViewModel>();
             Mapper.CreateMap<ProductCategory, ProductCategoryViewModel>();
             Mapper.CreateMap<Product, ProductViewModel>();
+            Mapper.CreateMap<Footer, FooterViewModel>();
         }
     }
 }

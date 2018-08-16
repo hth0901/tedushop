@@ -13,10 +13,12 @@ namespace TeduShop.Web.Controllers
     public class HomeController : Controller
     {
         IProductCategoryService _productCategoryService;
+        ICommonService _commonService;
 
-        public HomeController(IProductCategoryService productCategoryService)
+        public HomeController(IProductCategoryService productCategoryService, ICommonService commonService)
         {
             this._productCategoryService = productCategoryService;
+            this._commonService = commonService;
         }
 
         public ActionResult Index()
@@ -40,7 +42,9 @@ namespace TeduShop.Web.Controllers
         [ChildActionOnly]
         public ActionResult Footer()
         {
-            return PartialView("Footer");
+            var footerModel = this._commonService.GetFooter();
+            var footerViewModel = Mapper.Map<Footer, FooterViewModel>(footerModel);
+            return PartialView("Footer", footerViewModel);
         }
 
         [ChildActionOnly]
