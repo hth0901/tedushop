@@ -46,6 +46,7 @@ namespace TeduShop.Data.Migrations
             //manager.AddToRoles(adminUser.Id, new string[] { "Admin", "User" });
             //CreateProductCategorySample(context);
             //CreateProductSample(context);
+            CreateSlide(context);
         }
 
         private void CreateProductCategorySample(TeduShop.Data.TeduShopDbContext context)
@@ -120,6 +121,20 @@ namespace TeduShop.Data.Migrations
                 context.SaveChanges();
             }
 
+        }
+        private void CreateSlide(TeduShopDbContext dbContext)
+        {
+            if (dbContext.Slides.Count() == 0)
+            {
+                List<Slide> lstSlide = new List<Slide>()
+                {
+                    new Slide() {Name="Slide 1",DisplayOrder=1,Status=true,URL="#", Image="~/Assets/client/images/bag1.jpg", Description="this is slide 1 description"  },
+                    new Slide() {Name="Slide 2",DisplayOrder=2,Status=true,URL="#", Image="~/Assets/client/images/bag.jpg", Description="this is slide 2 description"  },
+                    new Slide() {Name="Slide 3",DisplayOrder=3,Status=true,URL="#", Image="~/Assets/client/images/bag1.jpg", Description="this is slide 3 description"  },
+                };
+                dbContext.Slides.AddRange(lstSlide);
+                dbContext.SaveChanges();
+            }
         }
     }
 }
