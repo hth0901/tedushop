@@ -9,5 +9,6 @@ namespace TeduShop.Web.Models
     {
         public IEnumerable<SlideViewModel> LstSlide { get; set; }
         public IEnumerable<ProductViewModel> LstProducts { get; set; }
+        public IEnumerable<ProductViewModel> TopSalesProducts { get; set; }
     }
 }
