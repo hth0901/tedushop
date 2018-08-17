@@ -2,12 +2,13 @@
 (function (app) {
     app.controller('productAddController', productAddController);
 
-    productAddController.$inject = ['$scope', 'apiService', 'notificationService', '$state'];
+    productAddController.$inject = ['$scope', 'apiService', 'notificationService', '$state', 'commonService'];
 
-    function productAddController($scope, apiService, notificationService, $state) {
+    function productAddController($scope, apiService, notificationService, $state, commonService) {
         $scope.product = {
             CreatedDate: new Date(),
             Status: true,
+            Alias:"",
         }
 
         $scope.ckeditorOptions = {
@@ -17,6 +18,10 @@
         };
 
         $scope.productCategories = [];
+
+        $scope.GetAlias = function () {
+            $scope.product.Alias = commonService.getSeoTitle($scope.product.Name);
+        }
 
         $scope.AddProduct = function () {
             $scope.product.MoreImages = JSON.stringify($scope.moreImages);

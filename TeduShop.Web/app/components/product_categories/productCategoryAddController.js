@@ -1,13 +1,17 @@
 ﻿(function (app) {
     app.controller('productCategoryAddController', addController);
 
-    addController.$inject = ['$scope', 'apiService', 'notificationService', '$state'];
+    addController.$inject = ['$scope', 'apiService', 'notificationService', '$state', 'commonService'];
 
-    function addController($scope, apiService, notificationService, $state) {
+    function addController($scope, apiService, notificationService, $state, commonService) {
         $scope.productCategory = {
             CreatedDate: new Date(),
             Status: true,
+            Name:'',
+            Alias:"",
         }
+
+        $scope.GetSeoTitle = GetSeoTitle;
 
         $scope.parentCategories = [];
 
@@ -19,6 +23,10 @@
                 notificationService.displayError('Them moi khong thanh cong!!');
             });
         };
+
+        function GetSeoTitle() {
+            $scope.productCategory.Alias = commonService.getSeoTitle($scope.productCategory.Name);
+        }
 
         function loadParentCategory() {
             apiService.get('/api/productcategory/getallparents', null, function (result) {

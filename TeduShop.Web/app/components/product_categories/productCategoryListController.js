@@ -86,7 +86,7 @@
                 params: {
                     keyword: $scope.keyword,
                     page: page,
-                    pageSize: 1,
+                    pageSize: 20,
                 }
             }
 
