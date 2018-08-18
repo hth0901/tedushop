@@ -27,11 +27,11 @@ namespace TeduShop.Web.Controllers
             return View();
         }
 
-        public ActionResult Category(int id, int page = 1)
+        public ActionResult Category(int id, int page = 1, string sort = "")
         {
             int pageSize = int.Parse(ConfigHelper.GetByKey("PageSize"));
             int totalRow = 0;
-            var lstProductModel = this._productService.GetListProductByCategoryIdPaging(id, page, pageSize, out totalRow);
+            var lstProductModel = this._productService.GetListProductByCategoryIdPaging(id, page, pageSize, sort, out totalRow);
 
             var lstProductViewModel = Mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(lstProductModel);
 
