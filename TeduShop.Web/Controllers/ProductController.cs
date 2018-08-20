@@ -9,6 +9,7 @@ using TeduShop.Web.Infrastructure.Core;
 using TeduShop.Web.Models;
 using AutoMapper;
 using TeduShop.Model.Models;
+using System.Web.Script.Serialization;
 
 namespace TeduShop.Web.Controllers
 {
@@ -24,7 +25,15 @@ namespace TeduShop.Web.Controllers
         // GET: Product
         public ActionResult Detail(int id)
         {
-            return View();
+            var productModel = this._productService.GetById(id);
+            var viewModel = Mapper.Map<Product, ProductViewModel>(productModel);
+            var relatedProduct = this._productService.GetRelatedProducts(id, 5);
+            ViewBag.RelatedProducts = Mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(relatedProduct);
+
+            var moreImages = viewModel.MoreImages;
+            List<string> listImages = new JavaScriptSerializer().Deserialize<List<string>>(moreImages);
+            ViewBag.MoreImages = listImages;
+            return View(viewModel);
         }
 
         public ActionResult Category(int id, int page = 1, string sort = "")

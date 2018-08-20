@@ -100,6 +100,8 @@ namespace TeduShop.Model.Models
             get;
             set;
         }
+
+        public int? Quantity { get; set; }
         [ForeignKey("CategoryID")]
         public virtual ProductCategory ProductCategory
         {

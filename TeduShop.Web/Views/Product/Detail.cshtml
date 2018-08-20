@@ -1,0 +1,134 @@
+﻿@model TeduShop.Web.Models.ProductViewModel
+
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/Layouts.cshtml";
+}
+
+@section footerJS{
+    <script src="~/Assets/client/js/jquery.flexisel.js"></script>
+}
+
+<div class="single_top">
+    <div class="single_grid">
+        <div class="grid images_3_of_2">
+            <ul id="etalage">
+                <li>
+                    <a href="optionallink.html">
+                        <img class="etalage_thumb_image img-responsive" src="@Model.Image" />
+                        @*<img class="etalage_source_image img-responsive" src="@Model.Image" title="" />*@
+                    </a>
+                </li>
+                @{
+                    var moreImages = (List<string>)ViewBag.MoreImages;
+                    if (moreImages.Count > 0)
+                    {
+                        foreach (var image in moreImages)
+                        {
+                            <li>
+                                <a href="optionallink.html">
+                                    <img class="etalage_thumb_image img-responsive" src="@image" />
+                                    <img class="etalage_source_image img-responsive" src="@image" title="" />
+                                </a>
+                            </li>
+                        }
+                    }
+                }
+                
+                <!--
+                <li>
+                    <a href="optionallink.html">
+                        <img class="etalage_thumb_image img-responsive" src="~/Assets/client/images/s4.jpg" />
+                        <img class="etalage_source_image img-responsive" src="~/Assets/client/images/si4.jpg" title="" />
+                    </a>
+                </li>
+                <li>
+                    <img class="etalage_thumb_image img-responsive" src="~/Assets/client/images/s2.jpg" />
+                    <img class="etalage_source_image img-responsive" src="~/Assets/client/images/si2.jpg" title="" />
+                </li>
+                <li>
+                    <img class="etalage_thumb_image img-responsive" src="~/Assets/client/images/s3.jpg" />
+                    <img class="etalage_source_image img-responsive" src="~/Assets/client/images/si3.jpg" />
+                </li>
+                <li>
+                    <img class="etalage_thumb_image img-responsive" src="~/Assets/client/images/s1.jpg" />
+                    <img class="etalage_source_image img-responsive" src="~/Assets/client/images/si1.jpg" />
+                </li>
+                -->
+            </ul>
+            <div class="clearfix"> </div>
+        </div>
+        <div class="desc1 span_3_of_2">
+            <h4>@Model.Name</h4>
+            <div class="cart-b">
+                <div class="left-n ">@(Model.Price == 0 ? "Lien he" : Model.Price.ToString("N0"))</div>
+                <a class="now-get get-cart-in" href="/them-gio-hang/@Model.ID">ADD TO CART</a>
+                <div class="clearfix"></div>
+            </div>
+            <h6>@Model.Quantity sản phẩm trong kho</h6>
+            <p>@Model.Description</p>
+            <div class="share">
+                <h5>Share Product :</h5>
+                <ul class="share_nav">
+                    <li><a href="#"><img src="~/Assets/client/images/facebook.png" title="facebook"></a></li>
+                    <li><a href="#"><img src="~/Assets/client/images/twitter.png" title="Twiiter"></a></li>
+                    <li><a href="#"><img src="~/Assets/client/images/rss.png" title="Rss"></a></li>
+                    <li><a href="#"><img src="~/Assets/client/images/gpluse.png" title="Google+"></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+
+    @{ 
+        var relatedProduct = (IEnumerable<TeduShop.Web.Models.ProductViewModel>)ViewBag.RelatedProducts;
+    }
+
+    <ul id="flexiselDemo1">
+        @foreach (var product in relatedProduct)
+        {
+            var url = "/" + product.Alias + ".p-" + product.ID + ".html";
+            <li><img src="@product.Image" /><div class="grid-flex"><a href="@url">@product.Name</a><p>@product.Price</p></div></li>
+        }
+        <!--
+        <li><img src="~/Assets/client/images/pi.jpg" /><div class="grid-flex"><a href="#">Bloch</a><p>Rs 850</p></div></li>
+        <li><img src="~/Assets/client/images/pi1.jpg" /><div class="grid-flex"><a href="#">Capzio</a><p>Rs 850</p></div></li>
+        <li><img src="~/Assets/client/images/pi2.jpg" /><div class="grid-flex"><a href="#">Zumba</a><p>Rs 850</p></div></li>
+        <li><img src="~/Assets/client/images/pi3.jpg" /><div class="grid-flex"><a href="#">Bloch</a><p>Rs 850</p></div></li>
+        <li><img src="~/Assets/client/images/pi4.jpg" /><div class="grid-flex"><a href="#">Capzio</a><p>Rs 850</p></div></li>
+        -->
+    </ul>
+    <script type="text/javascript">
+		 $(window).load(function() {
+			$("#flexiselDemo1").flexisel({
+				visibleItems: 5,
+				animationSpeed: 1000,
+				autoPlay: true,
+				autoPlaySpeed: 3000,
+				pauseOnHover: true,
+				enableResponsiveBreakpoints: true,
+		    	responsiveBreakpoints: {
+		    		portrait: {
+		    			changePoint:480,
+		    			visibleItems: 1
+		    		},
+		    		landscape: {
+		    			changePoint:640,
+		    			visibleItems: 2
+		    		},
+		    		tablet: {
+		    			changePoint:768,
+		    			visibleItems: 3
+		    		}
+		    	}
+		    });
+
+		});
+    </script>
+    
+
+    <div class="toogle">
+        <h3 class="m_3">Product Details</h3>
+        <p class="m_text">@Html.Raw(Model.Content)</p>
+    </div>
+</div>

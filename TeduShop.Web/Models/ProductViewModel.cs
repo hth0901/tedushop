@@ -137,5 +137,6 @@ namespace TeduShop.Web.Models
             get;
             set;
         }
+        public int? Quantity { get; set; }
     }
 }

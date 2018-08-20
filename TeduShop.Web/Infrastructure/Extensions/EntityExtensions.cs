@@ -96,6 +96,7 @@ namespace TeduShop.Web.Infrastructure.Extensions
             des.MetaKeyword = res.MetaKeyword;
             des.MetaDescription = res.MetaDescription;
             des.Status = res.Status;
+            des.Quantity = res.Quantity;
         }
     }
 }

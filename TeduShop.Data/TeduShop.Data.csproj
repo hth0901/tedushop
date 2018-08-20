@@ -89,6 +89,10 @@
     <Compile Include="Migrations\201808130337245_revertChangeProductField.Designer.cs">
       <DependentUpon>201808130337245_revertChangeProductField.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808200231579_AddFieldQuantity.cs" />
+    <Compile Include="Migrations\201808200231579_AddFieldQuantity.Designer.cs">
+      <DependentUpon>201808200231579_AddFieldQuantity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ErrorRepository.cs" />
@@ -135,6 +139,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808130337245_revertChangeProductField.resx">
       <DependentUpon>201808130337245_revertChangeProductField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808200231579_AddFieldQuantity.resx">
+      <DependentUpon>201808200231579_AddFieldQuantity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
