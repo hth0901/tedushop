@@ -67,6 +67,20 @@
             </div>
             <h6>@Model.Quantity sản phẩm trong kho</h6>
             <p>@Model.Description</p>
+            <div class="tag">
+                <h5>Tags :</h5>
+                <ul class="ui-icon-tag">
+                    @{
+                        var tags = (IEnumerable<TeduShop.Web.Models.TagViewModel>)ViewBag.Tags;
+                    }
+                    @foreach (var tag in tags)
+                    {
+                        <li>
+                            <kbd><a href="/tag/@(tag.ID).html" style="color:white">@tag.Name</a></kbd>
+                        </li>
+                    }
+                </ul>
+            </div>
             <div class="share">
                 <h5>Share Product :</h5>
                 <ul class="share_nav">
