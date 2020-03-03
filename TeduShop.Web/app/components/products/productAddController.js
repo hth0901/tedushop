@@ -21,11 +21,14 @@
 
         $scope.GetAlias = function () {
             $scope.product.Alias = commonService.getSeoTitle($scope.product.Name);
-        }
+        };
 
         $scope.AddProduct = function () {
+            let baseUrl = 'http://localhost:4084/api/value/test';
+            baseUrl = 'http://localhost:3087/api/first/test'
             $scope.product.MoreImages = JSON.stringify($scope.moreImages);
-            apiService.post('/api/product/create', $scope.product, function (result) {
+            //apiService.post('/api/product/create', $scope.product, function (result) {
+            apiService.post(baseUrl, $scope.product, function (result) {
                 notificationService.displaySuccess(result.data.Name + ' da dc them moi.');
                 $state.go('products');
             }, function (error) {

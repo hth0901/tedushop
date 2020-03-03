@@ -55,6 +55,25 @@ namespace TeduShop.Web.Api
         }
         #endregion
 
+        [Route("getallproduct")]
+        [HttpGet]
+        public List<ProductViewModel> getAllProduct()
+        {
+            int totalRow = 0;
+            int page = 0, pageSize = 20;
+            var model = this._productService.GetAll("");
+
+            totalRow = model.Count();
+            var query = model.OrderByDescending(x => x.CreatedDate).Skip(page * pageSize).Take(pageSize);
+            var responseData = Mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(query);
+            List<ProductViewModel> result = new List<ProductViewModel>();
+            result = responseData.ToList();
+            return result;
+
+            //var responseData = Mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(query);
+            //return responseData.ToList();
+        }
+
         #region create new data
         [Route("create")]
         [HttpPost]

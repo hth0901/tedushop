@@ -34,8 +34,8 @@ namespace TeduShop.Web.App_Start
         private void ConfigAutoFac(IAppBuilder app)
         {
             var builder = new ContainerBuilder();
-            builder.RegisterControllers(Assembly.GetExecutingAssembly());
-            builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
+            builder.RegisterControllers(Assembly.GetExecutingAssembly());       //register cho controller
+            builder.RegisterApiControllers(Assembly.GetExecutingAssembly());    //register cho api
 
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerRequest();
             builder.RegisterType<DbFactory>().As<IDbFactory>().InstancePerRequest();
